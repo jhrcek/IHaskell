@@ -50,6 +50,17 @@ extra-source-files:  README.md, MsgSpec.md
 
 -- Constraint on the version of Cabal needed to build this package.
 cabal-version:       1.16
+tested-with:         GHC == 8.4.4
+                      || == 8.6.5
+                      || == 8.8.4
+                      || == 8.10.7
+                      || == 9.0.2
+                      || == 9.2.8
+                      || == 9.4.8
+                      || == 9.6.7
+                      || == 9.8.4
+                      || == 9.10.3
+                      || == 9.12.2
 
 library
   ghc-options:         -Wall
