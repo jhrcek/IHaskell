@@ -1,5 +1,6 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE TypeOperators #-}
 
 -- | Provides 'IHaskellDisplay' instances for 'LaTeX' and 'LaTeXT'.
 module IHaskell.Display.Hatex () where

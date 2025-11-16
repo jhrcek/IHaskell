@@ -55,7 +55,6 @@
 -- fields by implementing FieldType and ToKey.
 module IHaskell.Display.Widgets.Types where
 
-import           Control.Applicative ((<$>))
 import qualified Control.Exception as Ex
 import           Control.Monad (unless, join, when, void,mzero)
 import           Data.IORef (IORef, readIORef, modifyIORef)
@@ -66,7 +65,6 @@ import           System.IO.Error
 import           System.Posix.IO
 import           Text.Printf (printf)
 import           GHC.Exts (Constraint)
-import           GHC.TypeLits
 
 import           Data.Aeson hiding (pairs)
 import           Data.Aeson.Types (Pair)
@@ -92,10 +90,9 @@ import           IHaskell.Display (IHaskellWidget(..), IHaskellDisplay(..), Disp
 import           IHaskell.IPython.Types (StreamType(..))
 import           IHaskell.IPython.Message.UUID
 
-import           IHaskell.Display.Widgets.Singletons (ToKey, toKey, HasKey)
-import           IHaskell.Display.Widgets.Singletons
 import qualified IHaskell.Display.Widgets.Singletons as S
 import           IHaskell.Display.Widgets.Common
+import Data.Kind (Type)
 
 type RElemOf r rs = RElem r rs (RIndex r rs)
 
@@ -158,7 +155,7 @@ type DescriptionStyleClass = StyleWidgetClass :++ '[ S.DescriptionWidth ]
 type LinkClass = CoreWidgetClass :++ '[S.ModelName, S.Target, S.Source]
 
 -- Types associated with Fields.
-type family FieldType f :: *
+type family FieldType f :: Type
 
 type instance FieldType S.ViewModule = Text
 type instance FieldType S.ViewModuleVersion = Text
@@ -358,11 +355,11 @@ data ToggleButtonsStyleType
 
 -- Fields associated with a widget
 
-type family AllToKey (xs :: [*]) :: Constraint where
+type family AllToKey (xs :: [Type]) :: Constraint where
   AllToKey '[]       = ()
   AllToKey (x ': xs) = (ToKey x, Typeable x, AllToKey xs)
 
-type family WidgetFields w :: [*]
+type family WidgetFields w :: [Type]
 type instance WidgetFields ButtonType =
                 DescriptionWidgetClass :++
                   [S.Disabled, S.Icon, S.ButtonStyleField,S.ClickHandler]
@@ -863,7 +860,7 @@ getAttr :: forall f w. RElemOf f (WidgetFields w) => IPythonWidget w -> IO (Attr
 #if MIN_VERSION_vinyl(0,9,0)
 getAttr widget = rget <$> _getState <$> readIORef (state widget)
 #else
-getAttr widget = rget (Proxy @f) <$> _getState <$> readIORef (state widget)
+getAttr widget = rget (Proxy @f) . _getState <$> readIORef (state widget)
 #endif
 
 -- | Get the value of a field.

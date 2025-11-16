@@ -1,6 +1,8 @@
+{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE DeriveFunctor, DeriveGeneric #-}
+{-# LANGUAGE TypeOperators #-}
 
 module IHaskell.Display.Diagrams.Animation
          ( animation

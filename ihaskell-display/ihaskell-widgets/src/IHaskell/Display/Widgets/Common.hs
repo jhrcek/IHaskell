@@ -24,7 +24,6 @@ import           Data.Typeable (Typeable)
 import           IHaskell.Display (IHaskellWidget)
 import           IHaskell.Eval.Widgets (widgetSendClose)
 
-import qualified IHaskell.Display.Widgets.Singletons as S
 import IHaskell.Display.Widgets.Singletons
 
 #if MIN_VERSION_aeson(2,0,0)
