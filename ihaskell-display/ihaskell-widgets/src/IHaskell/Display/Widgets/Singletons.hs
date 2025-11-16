@@ -7,6 +7,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE TypeOperators #-}
 
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
@@ -152,9 +153,6 @@ data LRight
 data LTop
 data LVisibility
 data LWidth
-
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE DataKinds #-}
 
 -- Define a class with an associated type family HasKey
 class Typeable a => ToKey a where

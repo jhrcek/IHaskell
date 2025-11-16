@@ -21,6 +21,7 @@ module IHaskell.Display.Widgets.Interactive
 
 import           Data.Text
 import           Data.Proxy
+import           Data.Kind (Type)
 
 #if MIN_VERSION_vinyl(0,9,0)
 import           Data.Vinyl.Core (Rec(..))
@@ -57,7 +58,7 @@ data WidgetConf a where
               -> WidgetConf a
 
 
-type family WithTypes (ts :: [*]) (r :: *) :: * where
+type family WithTypes (ts :: [Type]) (r :: Type) :: Type where
         WithTypes '[] r = r
         WithTypes (x ': xs) r = (x -> WithTypes xs r)
 
@@ -124,7 +125,7 @@ mkChildren widgets =
   let childRecord = rmap (\(RequiredWidget w) -> Const (ChildWidget w)) widgets
   in recordToList childRecord
 
-class MakeConfs (ts :: [*]) where
+class MakeConfs (ts :: [Type]) where
   mkConfs :: proxy ts -> Rec WidgetConf ts
 
 instance MakeConfs '[] where

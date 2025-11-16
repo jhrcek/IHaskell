@@ -47,7 +47,7 @@ import           Data.List (find)
 import           Data.Map (Map)
 import qualified Data.Map as Map
 import           Data.Maybe (fromMaybe)
-import           Data.Semigroup (Semigroup)
+--import           Data.Semigroup (Semigroup)
 import           Data.Text (Text, pack)
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
